@@ -8,11 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import passakornsuriyarach.snru.ac.th.emercall.fragment.HospitalFragment;
 import passakornsuriyarach.snru.ac.th.emercall.fragment.MainFragment;
 
-public class MainActivity extends AppCompatActivity {
 
+public class MainActivity extends AppCompatActivity {
 
     //    Explicit
     private DrawerLayout drawerLayout;
@@ -24,7 +27,55 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        create Toolbar
+//        Police Controller
+        TextView policeTextView = findViewById(R.id.txtPolice);
+        policeTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentMainFragment, new MainFragment()).commit();
+                drawerLayout.closeDrawers();
+            }
+        });
+
+
+
+//        Hospital Controller
+        TextView hospitalTextView = findViewById(R.id.txtHospotal);
+        hospitalTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentMainFragment, new HospitalFragment()).commit();
+                drawerLayout.closeDrawers();
+            }
+        });
+
+
+//        Insurance Controller
+        TextView insuranceTextView = findViewById(R.id.txtInsurance);
+        insuranceTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentMainFragment, new HospitalFragment()).commit();
+                drawerLayout.closeDrawer();
+            }
+        });
+
+//        Exit Controller
+        TextView exitTextView = findViewById(R.id.txtExit);
+        exitTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentMainFragment, new HospitalFragment()).commit();
+                drawerLayout.closeDrawer();
+            }
+        });
+
+
+//        Create Toolbar
         Toolbar toolbar = findViewById(R.id.toolbarMain);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -39,17 +90,16 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
 
-//  Add Fragment
+//        Add Fragment
         if (savedInstanceState == null) {
 
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.contentMainFragment, new MainFragment()).commit();
 
-
         }
 
 
-    } //Main Method
+    }   // Main Method
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -66,13 +116,14 @@ public class MainActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
 
         actionBarDrawerToggle.onConfigurationChanged(newConfig);
+
     }
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
 
-
         actionBarDrawerToggle.syncState();
+
     }
-} //Main Class
+}   // Main Class
